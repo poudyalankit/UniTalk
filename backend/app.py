@@ -18,7 +18,6 @@ conn.commit()
 app = Flask(__name__)
 CORS(app)
 
-
 @app.route('/user/register', methods=['POST'])
 def create_user():
     unique_id = str(uuid.uuid4())
@@ -44,6 +43,11 @@ def create_user():
     }
     response = jsonify(success_message)
     return response, 201
+
+@app.route('/user/login', methods=['POST'])
+def login_user():
+    
+
 
 if __name__ == '__main__':
     app.run(host='localhost', debug=True, port=3001)
