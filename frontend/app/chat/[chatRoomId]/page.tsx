@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 const ChatRoomPage = () => {
     const router = useRouter();
     const [selectedLanguage, setSelectedLanguage] = useState(''); // State to track selected language
+    const [roomLinkCopied, setRoomLinkCopied] = useState(false);
 
     const setUserAndSetCookie = async () => {
         const currentRoute = window.location.pathname;
@@ -28,6 +29,7 @@ const ChatRoomPage = () => {
             }
         } catch (error) {
             console.error('Error setting user and cookie:', error);
+            //router.push('/');
         }
     };
 
@@ -43,14 +45,25 @@ const ChatRoomPage = () => {
     function handleSendMessage() {
 
     }
+    const handleCopyRoomLink = () => {
+        const currentRoomLink = window.location.href;
 
+        navigator.clipboard.writeText(currentRoomLink).then(function() {
+            setTimeout(() => {
+                setRoomLinkCopied(false);
+            }, 3000);
+        }).catch(function() {
+            setRoomLinkCopied(false);
+            console.error('Failed to copy room link');
+        });
+    };
     let message;
     return (
         <div className="min-h-screen flex flex-col items-center justify-center">
             <h1 className="text-2xl font-bold mb-4">Chat Room</h1>
 
-            <div className="chat-box bg-gray-100 p-4 w-1/2 h-1/2 mb-4">
-                    <div className="mb-2">Test message</div>
+            <div className="chat-box bg-gray-100 p-4 w-1/2 h-[50vh] mb-4 overflow-y-auto">
+                    <div className="mb-2">user1: Test</div>
             </div>
 
             <div className="w-1/2">
@@ -72,7 +85,7 @@ const ChatRoomPage = () => {
             </div>
 
             <div className="language-dropdown text-center">
-                <label htmlFor="language" className="block font-semibold">Select Language:</label>
+                <label htmlFor="language" className="mt-10 block font-semibold">Select Language:</label>
                 <select
                     id="language"
                     value={selectedLanguage}
@@ -82,12 +95,18 @@ const ChatRoomPage = () => {
                     <option value="">Choose a language</option>
                     <option value="language1">Language 1</option>
                     <option value="language2">Language 2</option>
-                    {/* Add more language options as needed */}
                 </select>
+                <button
+                    onClick={handleCopyRoomLink}
+                    className="mt-4 bg-indigo-600 text-white p-2 rounded-md"
+                >
+                    {roomLinkCopied ? 'Room Link Copied' : 'Copy Room Link'}
+                </button>
             </div>
         </div>
     );
 };
+
 
 
 export default ChatRoomPage;
