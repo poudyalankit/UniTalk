@@ -1,7 +1,3 @@
-Certainly! Below is the README with an additional section for showcasing a GIF of UniTalk in action:
-
----
-
 # UniTalk: Auto-Translating Chat Platform 🌐
 
 UniTalk is a chat platform designed to break language barriers, providing real-time auto-translations for seamless conversations. Built with a React frontend using Next.js (in TypeScript) and a Python backend integrated with Flask, LibreTranslate, Socket.io, and SQLite.
