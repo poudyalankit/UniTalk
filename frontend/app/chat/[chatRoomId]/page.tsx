@@ -2,11 +2,17 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import io from 'socket.io-client';
+const socket = io('http://localhost:3001');
 
 const ChatRoomPage = () => {
     const router = useRouter();
-    const [selectedLanguage, setSelectedLanguage] = useState(''); // State to track selected language
+    const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
+    const [message, setMessage] = useState<string>('');
+    const [chatMessages, setChatMessages] = useState<string[]>([]);
     const [roomLinkCopied, setRoomLinkCopied] = useState(false);
+    const [supportedLanguages, setSupportedLanguages] = useState<{ code: string; name: string }[]>([]);
+    const [loadingLanguages, setLoadingLanguages] = useState(true);
 
     const setUserAndSetCookie = async () => {
         const currentRoute = window.location.pathname;
@@ -35,6 +41,16 @@ const ChatRoomPage = () => {
 
     useEffect(() => {
         setUserAndSetCookie().then(r => console.log());
+        fetch('http://localhost:3001/api/languages')
+            .then((response) => response.json())
+            .then((data: { code: string; name: string }[]) => {
+                setSupportedLanguages(data);
+                setLoadingLanguages(false);
+            })
+            .catch((error) => {
+                console.error('Failed to fetch supported languages', error);
+                setLoadingLanguages(true);
+            });
     }, []);
 
     const handleLanguageChange = (e: { target: { value: any; }; }) => {
@@ -42,22 +58,26 @@ const ChatRoomPage = () => {
         setSelectedLanguage(selectedValue);
     };
 
-    function handleSendMessage() {
+    const handleSendMessage = async () => {
+            socket.emit('message', { 'message': message });
+            setMessage('');
+    };
 
-    }
     const handleCopyRoomLink = () => {
         const currentRoomLink = window.location.href;
 
         navigator.clipboard.writeText(currentRoomLink).then(function() {
+            setRoomLinkCopied(true);
             setTimeout(() => {
                 setRoomLinkCopied(false);
             }, 3000);
+
         }).catch(function() {
             setRoomLinkCopied(false);
             console.error('Failed to copy room link');
         });
     };
-    let message;
+
     return (
         <div className="min-h-screen flex flex-col items-center justify-center">
             <h1 className="text-2xl font-bold mb-4">Chat Room</h1>
@@ -91,10 +111,13 @@ const ChatRoomPage = () => {
                     value={selectedLanguage}
                     onChange={handleLanguageChange}
                     className="block w-full p-2 border border-gray-300 rounded-md"
+                    disabled={loadingLanguages}
                 >
-                    <option value="">Choose a language</option>
-                    <option value="language1">Language 1</option>
-                    <option value="language2">Language 2</option>
+                    {supportedLanguages.map((language) => (
+                        <option key={language.code} value={language.code}>
+                            {language.name}
+                        </option>
+                    ))}
                 </select>
                 <button
                     onClick={handleCopyRoomLink}
