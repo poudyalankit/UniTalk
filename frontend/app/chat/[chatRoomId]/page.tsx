@@ -120,8 +120,21 @@ const ChatRoomPage = () => {
         }
     };
 
-    const handleSendMessage = async (e) => {
+    const handleSendEnter = async (e) => {
         if (e.key === 'Enter' && message !== '') {
+            const newMessage = {
+                'message': message,
+                'id': userID,
+                'chat': chatID,
+            };
+            socket.emit('message', newMessage);
+            setChatMessages((prev) => [...prev, newMessage]);
+            setMessage('');
+        }
+    };
+
+    const handleSendClick = async () => {
+        if (message !== '') {
             const newMessage = {
                 'message': message,
                 'id': userID,
@@ -174,12 +187,12 @@ const ChatRoomPage = () => {
                         type="text"
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
-                        onKeyPress={handleSendMessage}
+                        onKeyPress={handleSendEnter}
                         className="w-full p-2 border border-gray-300 rounded-l-md"
                         placeholder="Type your message..."
                     />
                     <button
-                        onClick={handleSendMessage}
+                        onClick={handleSendClick}
                         className="bg-indigo-600 text-white p-2 rounded-r-md"
                     >
                         Send
