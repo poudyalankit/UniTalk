@@ -1,9 +1,62 @@
-<div class="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white overflow-hidden">
-    <div class="main-content py-8 px-4 rounded-xl bg-transparent">
-        <h1 class="text-4xl font-extrabold mb-4 text-white">UniTalk</h1>
-        <p class="mb-8 text-white font-medium">Connect with anyone, anywhere, in any language.</p>
-        <button (click)="startChatting()" class="bg-white font-bold py-2 px-4 rounded-xl hover:bg-gray-200 transition duration-300 ease-in-out shadow-lg transform hover:scale-105">
-            <span class="text-gradient">Start Chatting</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniTalk - Auto-translating Chat Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#faf9f6',
+                        text: '#020202',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-text min-h-screen overflow-hidden">
+<nav class="flex justify-between items-center p-4">
+    <div class="flex items-center space-x-2">
+        <img src="https://ankitpoudyal.com/_nuxt/img/unitalk.f143b5a.png" alt="UniTalk Logo" class="rounded-full w-10 h-10">
+        <div class="text-2xl font-bold">UniTalk</div>
+    </div></nav>
+
+<main class="container mx-auto mt-16 text-center px-4">
+    <h1 class="text-5xl font-bold mb-12">
+        Chat Across Languages
+    </h1>
+    <p class="text-xl text-gray-600 mb-12">
+        Seamlessly communicate with people from all over the world in 30+ languages.
+    </p>
+    <div class="max-w-xl mx-auto mb-8">
+        <a href="/chat">
+        <button class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white py-4 px-8 rounded-full text-lg font-semibold transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-glow">
+            Start your conversation
         </button>
+        </a>
     </div>
-</div>
+
+    <!-- iPhone mockup -->
+    <div class="flex justify-center overflow-hidden" style="height: 60vh;">
+        <div class="relative">
+            <img src="https://i.imgur.com/SpEMB5d.png" alt="iPhone Mockup" class="mx-auto max-w-xs transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-glow">
+        </div>
+    </div>
+
+</main>
+<footer class="text-gray-600 py-8">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <div class="flex space-x-6 mb-4 md:mb-0">
+                <a href="https://github.com/poudyalankit/UniTalk" target="_blank" class="transition-transform duration-300 ease-in-out hover:text-gray-700">GitHub</a>
+                <a href="https://ankitpoudyal.com" target="_blank" class="transition-transform duration-300 ease-in-out hover:text-gray-700">ankitpoudyal.com</a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
