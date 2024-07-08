@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.messages-container {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.messages-container::-webkit-scrollbar {
+    width: 4px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+    .messages-container {
+        font-size: 16px;
+    }
+
+    input, button {
+        font-size: 16px;
+    }
+}
+
+/* Add smooth transitions for all interactive elements */
+a, button, input, .hover\:bg-gray-100, .focus\:ring {
+    transition: all 0.2s ease-in-out;
+}
+
+/* Hover animations */
+a:hover, button:hover {
+    transform: translateY(-1px);
+}
+
+/* Focus animations */
+input:focus, button:focus {
+    transform: scale(1.02);
+}
+
+/* Sidebar animation */
+aside {
+    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Modal animation */
+.modal-content {
+    transition: all 0.3s ease-in-out;
+}
+
+.modal-content.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.modal-content.hide {
+    opacity: 0;
+    transform: scale(0.95);
+}

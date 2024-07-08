@@ -28,7 +28,7 @@ app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://localhost:3001"]}})
 socketio = SocketIO(app, cors_allowed_origins=["http://localhost:3000", "http://localhost:3001"])
 
-lt = LibreTranslateAPI("https://translate.argosopentech.com/")
+lt = LibreTranslateAPI("https://translate.terraprint.co")
 languages = lt.languages()
 
 
