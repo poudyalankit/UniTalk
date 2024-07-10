@@ -1,11 +1,11 @@
 export const environment = {
-    production: false,
+    production: true,
     firebase: {
-        apiKey: process.env['NG_APP_FIREBASE_API_KEY'],
-        authDomain: process.env['NG_APP_FIREBASE_AUTH_DOMAIN'],
-        projectId: process.env['NG_APP_FIREBASE_PROJECT_ID'],
-        storageBucket: process.env['NG_APP_FIREBASE_STORAGE_BUCKET'],
-        messagingSenderId: process.env['NG_APP_FIREBASE_MESSAGING_SENDER_ID'],
-        appId: process.env['NG_APP_FIREBASE_APP_ID']
+        apiKey: "AIzaSyC0IrVq18hfFBahI6C0MTgkZPsJzUIQ1ok",
+        authDomain: "unitalk-1dacb.firebaseapp.com",
+        projectId: "unitalk-1dacb",
+        storageBucket: "unitalk-1dacb.appspot.com",
+        messagingSenderId: "1006582161334",
+        appId: "1:1006582161334:web:465d111545c22e2cbaab17"
     }
 };
