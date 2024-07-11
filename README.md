@@ -32,11 +32,12 @@ Make sure you have the following installed:
 ### Frontend
 
 1. Create a Firestore database on Google Firebase.
-2. Install the required dependencies:
+2. Install the required dependencies using
    ```bash
    npm install
    ```
-3. Create an `environment.ts` file inside the `src/environments` folder which will include your Firebase environment variables. For example:
+
+6. Create an `environment.ts` file inside the `src/environments` folder which will include your Firebase environment variables. For example:
    ```typescript
    export const environment = {
        production: true,
@@ -50,11 +51,11 @@ Make sure you have the following installed:
        }
    };
    ```
-4. Start the development server:
+7. Start the development server:
    ```bash
    npm run start
    ```
-5. Open your browser and navigate to `http://localhost:4200` to access UniTalk.
+8. Open your browser and navigate to `http://localhost:4200` to access UniTalk.
 
 ## Contributions
 
