@@ -1,6 +1,6 @@
 <div class="min-h-screen flex bg-white text-gray-900 relative">
     <!-- Left Sidebar -->
-    <aside [ngClass]="{'w-64 md:relative': !leftSidebarCollapsed, 'w-0': leftSidebarCollapsed}"
+    <aside [ngClass]="{'w-64 md:relative': !leftSidebarCollapsed, 'w-0': leftSidebarCollapsed, 'w-full h-full absolute z-40': !leftSidebarCollapsed && isMobile}"
            class="fixed md:static top-0 left-0 h-full bg-white border-r border-gray-200 transition-all duration-300 ease-in-out overflow-hidden z-30">
         <div class="p-4 h-full flex flex-col">
             <div class="flex items-center justify-between mb-6">
@@ -54,7 +54,7 @@
     </aside>
 
     <!-- Main content -->
-    <main class="flex-1 flex flex-col min-h-screen">
+    <main class="flex-1 flex flex-col min-h-screen main-content">
         <!-- Header -->
         <header class="bg-white border-b border-gray-200 p-4 flex items-center justify-between">
             <div class="flex items-center">
@@ -84,15 +84,14 @@
                         </div>
                     </div>
                 </div>
-                <span>Language: {{ selectedLanguageName }}</span>
+                <span>{{ selectedLanguageName }}</span>
 
                 <div class="relative">
                     <button (click)="copyUUID()" class="flex items-center space-x-2 text-gray-500 hover:bg-gray-100 rounded p-2 transition-colors duration-200">
-                        <span class="sr-only">Copy Invite Code</span>
+                        <span class="sr-only">Invite</span>
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 3H5a2 2 0 00-2 2v11a2 2 0 002 2h4m10-14h-4a2 2 0 00-2 2v4m6 6H9m6-6H9m6 6v6m6-6h-6"></path>
                         </svg>
-                        <span>Copy Invite Code</span>
                     </button>
                 </div>
                 <button (click)="toggleRightSidebar()" class="text-gray-500 hover:bg-gray-100 rounded p-2 transition-colors duration-200">
@@ -105,7 +104,7 @@
         </header>
 
         <!-- Chat area -->
-        <div *ngIf="activeChatId" class="flex-1 overflow-y-auto p-4 space-y-4 messages-container">
+        <div *ngIf="activeChatId" class="flex-1 overflow-y-auto p-4 space-y-4 messages-container scrollbar-thin">
             <div *ngFor="let message of messages" class="flex flex-col space-y-1 mb-4">
                 <div class="flex items-center space-x-2">
                     <span class="font-semibold text-lg">{{ message.userName }}</span>
@@ -119,7 +118,8 @@
         <div *ngIf="activeChatId" class="bg-white p-4">
             <div class="flex items-center bg-gray-100 rounded-full p-2">
                 <input #messageInput type="text" placeholder="Type your message..."
-                       class="flex-1 bg-transparent text-lg px-4">
+                       class="flex-1 bg-transparent text-lg px-4"
+                       (keydown)="onKeyDown($event, messageInput)">
                 <button (click)="sendMessage(messageInput)" class="ml-2 text-blue-500 p-2 hover:bg-blue-100 rounded-full">
                     <span class="sr-only">Send</span>
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -128,10 +128,11 @@
                 </button>
             </div>
         </div>
+
     </main>
 
     <!-- Right Sidebar (Members) -->
-    <aside *ngIf="activeChatId" [ngClass]="{'w-64 md:relative': !rightSidebarCollapsed, 'w-0': rightSidebarCollapsed}"
+    <aside *ngIf="activeChatId" [ngClass]="{'w-64 md:relative': !rightSidebarCollapsed, 'w-0': rightSidebarCollapsed, 'w-full h-full absolute z-40': !rightSidebarCollapsed && isMobile}"
            class="fixed md:static top-0 right-0 h-full bg-white border-l border-gray-200 transition-all duration-300 ease-in-out overflow-hidden z-30">
         <div class="p-4 h-full flex flex-col">
             <div class="flex items-center justify-between mb-6">

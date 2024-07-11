@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, ElementRef, ViewChild, HostListener} from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { v4 as uuidv4 } from 'uuid';
 import { ChatService } from "../chat.service";
@@ -62,6 +62,13 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       private chatService: ChatService,
       private translationService: TranslationService
   ) {}
+
+  isMobile: boolean = window.innerWidth <= 768;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: { target: { innerWidth: number; }; }) {
+    this.isMobile = event.target.innerWidth <= 768;
+  }
 
   ngOnInit(): void {
     this.checkUser();
@@ -183,6 +190,12 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       });
 
       input.value = '';
+    }
+  }
+
+  onKeyDown(event: KeyboardEvent, inputElement: HTMLInputElement): void {
+    if (event.key === 'Enter') {
+      this.sendMessage(inputElement).then(r => () => {});
     }
   }
 
