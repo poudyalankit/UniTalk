@@ -16,9 +16,11 @@ UniTalk is a chat platform designed to break language barriers, providing real-t
 - Firebase
 - Tailwind CSS
 
-## Live Demo
+## Demo
 
-Check out the live demo at [unitalk.ankitpoudyal.com](http://unitalk.ankitpoudyal.com).
+Check out the live demo at [unitalk.ankitpoudyal.com](http://unitalk.ankitpoudyal.com) or the video demo below:
+
+https://github.com/user-attachments/assets/e6a621e5-24d3-4dc1-8401-3a67e8933d9b
 
 ## Prerequisites
 
@@ -31,7 +33,7 @@ Make sure you have the following installed:
 
 ### Frontend
 
-1. Create a Firestore database on Google Firebase.
+1. Create a Firestore database on [Google Firebase](https://firebase.google.com/).
 2. Install the required dependencies using
    ```bash
    npm install
